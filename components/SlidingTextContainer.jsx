@@ -26,7 +26,7 @@ const SlidingTextContainer = ({ texts }) => {
             }`}
             style={{
               animation: index === currentIndex ? "scaleInOut 2s forwards" : "",
-              animationDelay: `${index * 2}s`, // Adjust the delay for each text
+              // Adjust the delay for each text
             }}
           >
             {text}

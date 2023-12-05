@@ -176,17 +176,6 @@ main {
   transition: transform 0.02s linear; /* Adjust the transition duration */
 }
 
-.icon {
-  width: 50px; /* Adjust the size of the icons */
-  height: 50px;
-  color: #fff; /* Adjust the text color */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px; /* Adjust the spacing between icons */
-  font-size: 18px;
-}
-
 .btn {
   display: inline-flex;
   padding: 15px 30px;

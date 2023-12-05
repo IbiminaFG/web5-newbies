@@ -33,14 +33,7 @@ const SlantedContainer = ({ icons }) => {
         style={{ transform: `translateX(${position}%)` }}
       >
         {icons.map((icon, index) => (
-          <Image
-            src={icon}
-            width={50}
-            height={50}
-            alt="crypto"
-            key={index}
-            className="icon"
-          />
+          <Image src={icon} width={50} height={50} alt="crypto" key={index} />
         ))}
       </div>
     </div>
