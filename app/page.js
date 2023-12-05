@@ -1,113 +1,216 @@
-import Image from 'next/image'
+"use client";
+
+import { Web5 } from "@web5/api";
+
+import Accordion from "@/components/Accordion";
+import GridFrame from "@/components/GridFrame";
+import Header from "@/components/Header";
+import LearnMore from "@/components/LearnMore";
+import SearchBar from "@/components/SearchBar";
+import SlantedContainer from "@/components/SlantedContainer";
+import SlidingTextContainer from "@/components/SlidingTextContainer";
+import Image from "next/image";
+import Link from "next/link";
+import TopRadialBall from "@/components/TopRadialBall";
+import { useState } from "react";
 
 export default function Home() {
+  const [web5, setWeb5] = useState(null);
+  const [myDid, setMyDid] = useState(null);
+  const [collapseDid, setCollapseDid] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
+
+  const texts = ["Companion", "Partner 😀"];
+  const icons = [
+    "/assets/cryptocurrency.svg",
+    "/assets/cryptocurrency-1.svg",
+    "/assets/cryptocurrency-2.svg",
+    "/assets/cryptocurrency-3.svg",
+    "/assets/cryptocurrency-4.svg",
+    "/assets/cryptocurrency-5.svg",
+    "/assets/cryptocurrency-6.svg",
+    "/assets/cryptocurrency-7.svg",
+    "/assets/cryptocurrency-8.svg",
+    "/assets/cryptocurrency-9.svg",
+    "/assets/cryptocurrency.svg",
+    "/assets/cryptocurrency-1.svg",
+    "/assets/cryptocurrency-2.svg",
+    "/assets/cryptocurrency-3.svg",
+    "/assets/cryptocurrency-4.svg",
+    "/assets/cryptocurrency-5.svg",
+    "/assets/cryptocurrency-6.svg",
+    "/assets/cryptocurrency-7.svg",
+    "/assets/cryptocurrency-8.svg",
+    "/assets/cryptocurrency-9.svg",
+    "/assets/cryptocurrency.svg",
+    "/assets/cryptocurrency-1.svg",
+    "/assets/cryptocurrency-2.svg",
+    "/assets/cryptocurrency-3.svg",
+    "/assets/cryptocurrency-4.svg",
+    "/assets/cryptocurrency-5.svg",
+    "/assets/cryptocurrency-6.svg",
+    "/assets/cryptocurrency-7.svg",
+    "/assets/cryptocurrency-8.svg",
+    "/assets/cryptocurrency-9.svg",
+  ];
+
+  const accordions = [
+    {
+      date: "18 dec. 2023",
+      title: "project launch",
+      texts: [
+        "help educate about how to use",
+        "expand market and community",
+        "speak with users for feedbacks",
+      ],
+    },
+    {
+      date: "18 dec. 2023",
+      title: "listing and platform launch",
+      texts: [
+        "help educate about how to use",
+        "expand market and community",
+        "speak with users for feedbacks",
+      ],
+    },
+    {
+      date: "18 dec. 2023",
+      title: "growth and education",
+      texts: [
+        "help educate about how to use",
+        "expand market and community",
+        "speak with users for feedbacks",
+      ],
+    },
+    {
+      date: "18 dec. 2023",
+      title: "launch and expansion",
+      texts: [
+        "help educate about how to use",
+        "help educate about how to use",
+        "help educate about how to use",
+      ],
+    },
+  ];
+
+  const initWeb5 = async () => {
+    const answer = confirm("Are you sure you want to connect to web?");
+
+    if (answer) {
+      const { web5, did } = await Web5.connect();
+      console.log("did", did);
+      setWeb5(web5);
+      setMyDid(did);
+
+      if (web5 && did) {
+        const firstSix = did.substring(0, 6);
+        const lastSix = did.substring(did.length - 6);
+        const finalResult = `${firstSix}......${lastSix}`;
+        setCollapseDid(finalResult);
+        setIsConnected(true);
+      }
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
+    <>
+      <Header isConnected={isConnected} collapseDid={collapseDid} />
+      <main className="sm:py-24 pb-40 relative">
+        <TopRadialBall />
+        <SearchBar />
+        <h1 className="heading_text">Decentralized Financial </h1>
+        <SlidingTextContainer texts={texts} />
+        <p className="text-primary-gray text-center px-3 text-base sm:text-2xl font-normal capitalize mt-[50px] mb-[50px] max-w-[1000px] mx-auto">
+          decentralized financial companion that transforms savings and
+          investments into an engaging and secured experience. aligned with
+          business goal of expanding market share in the decentralized finance
+          sector.
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex justify-center items-center gap-[40px] text-primary-white">
+          <button
+            className="p-[15px] rounded-[48px] bg-[#6205E7]"
+            onClick={initWeb5}
           >
-            By{' '}
+            Connect
+          </button>
+          <button className="button_style">
+            <span>Watch Demo</span>{" "}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              src="/assets/play-circle.svg"
+              width={20}
+              height={20}
+              alt="play icon"
             />
-          </a>
+          </button>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+        <div className="flex justify-center items-center mt-6 text-sm sm:text-2xl font-bold text-primary-white gap-1">
+          <span className="capitalize">learn about our launch date</span>
+          <Link href="/">
+            <Image
+              src="/assets/arrow-right.svg"
+              width={32}
+              height={32}
+              alt="arrow icon"
+              className="w-[20px] h-[20px]"
+            />
+          </Link>
+        </div>
+        <SlantedContainer icons={icons} />
+        <section className="flex flex-col items-center px-3 sm:px-[100px]">
+          <h1 className="btn text-primary-white">Our Core</h1>
+          <h2 className="heading_text">what is buddy xplora?</h2>
+          <p className="text-primary-gray text-center text-base sm:text-2xl font-normal capitalize mt-[50px] mb-[50px] max-w-[1000px] mx-auto">
+            buddy xplora is a decentralized financial companion that transforms
+            savings and investment into an engaging and secure experience{" "}
           </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
+          <div className="flex p-5 sm:p-[50px] mvp_container relative">
+            <div>
+              <h2 className="lineHeight-sm text-base sm:text-[40px] font-bold capitalize text-primary-white">
+                buddy xplora minimum viable product
+              </h2>
+              <p className="capitalize text-sm sm:text-lg text-primary-gray mt-4 mb-4 sm:mt-[49px] sm:mb-[30px]">
+                the MVP landing page provides a glimpse into the exciting world
+                of decentralised savings and investment. with a focus on
+                simplicity, security and education, the mVP landing page
+                introduces key features to engage potential users
+              </p>
+              <LearnMore />
+            </div>
+            <div className="hidden md:block w-full h-full">
+              <Image
+                src="/assets/mvp.png"
+                width={300}
+                height={300}
+                alt="minimum viable product"
+                className="h-[441px] w-[588px] absolute top-0 -right-[100px]"
+              />
+            </div>
+          </div>
+        </section>
+        <section className="flex flex-col items-center px-3 sm:px-[100px] relative">
+          <TopRadialBall />
+          <h1 className="btn text-primary-white mt-[132px]">Core Features</h1>
+          <h2 className="heading_text">building amazing services</h2>
+          <p className="text-primary-gray text-center text-base sm:text-2xl font-normal capitalize mt-0 mb-5 sm:mt-[50px] sm:mb-[50px]">
+            these are core features of what we are building
           </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
+          <GridFrame />
+        </section>
+        <section className="flex flex-col items-center px-3 sm:px-[100px]">
+          <h1 className="btn text-primary-white mt-7 sm:mt-[132px]">
+            Our Road Map
+          </h1>
+          <h2 className="heading_text">our journey explained</h2>
+          <p className="text-primary-gray text-center text-base sm:text-2xl font-normal capitalize mt-0 sm:mt-[50px] mb-8 sm:mb-[50px]">
+            these are key journey and goals we have set
           </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          <div className="flex flex-col gap-[30px]">
+            {accordions.map((accordion, index) => (
+              <Accordion accordion={accordion} key={index} />
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
+  );
 }
