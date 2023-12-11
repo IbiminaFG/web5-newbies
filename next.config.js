@@ -1,10 +1,11 @@
 const webpack = require("webpack");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, buildId, dev, webpack }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -18,7 +19,8 @@ const nextConfig = {
         }),
         new webpack.NormalModuleReplacementPlugin(/node:crypto/, (resource) => {
           resource.request = resource.request.replace(/^node:/, "");
-        })
+        }),
+        new NodePolyfillPlugin()
       );
     }
     return config;

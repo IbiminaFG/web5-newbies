@@ -1,7 +1,5 @@
 "use client";
 
-import { Web5 } from "@web5/api";
-
 import Accordion from "@/components/Accordion";
 import GridFrame from "@/components/GridFrame";
 import Header from "@/components/Header";
@@ -12,7 +10,7 @@ import SlidingTextContainer from "@/components/SlidingTextContainer";
 import Image from "next/image";
 import Link from "next/link";
 import TopRadialBall from "@/components/TopRadialBall";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [web5, setWeb5] = useState(null);
@@ -93,24 +91,29 @@ export default function Home() {
     },
   ];
 
-  const initWeb5 = async () => {
-    const answer = confirm("Are you sure you want to connect to web?");
+  useEffect(() => {
+    const initWeb5 = async () => {
+      const { Web5 } = await import("@web5/api/browser");
 
-    if (answer) {
-      const { web5, did } = await Web5.connect();
-      console.log("did", did);
-      setWeb5(web5);
-      setMyDid(did);
+      const answer = confirm("Are you sure you want to connect to web?");
 
-      if (web5 && did) {
-        const firstSix = did.substring(0, 6);
-        const lastSix = did.substring(did.length - 6);
-        const finalResult = `${firstSix}......${lastSix}`;
-        setCollapseDid(finalResult);
-        setIsConnected(true);
+      if (answer) {
+        const { web5, did } = await Web5.connect();
+        console.log("did", did);
+        setWeb5(web5);
+        setMyDid(did);
+
+        if (web5 && did) {
+          const firstSix = did.substring(0, 6);
+          const lastSix = did.substring(did.length - 6);
+          const finalResult = `${firstSix}......${lastSix}`;
+          setCollapseDid(finalResult);
+          setIsConnected(true);
+        }
       }
-    }
-  };
+    };
+    initWeb5();
+  }, []);
 
   return (
     <>
@@ -129,7 +132,7 @@ export default function Home() {
         <div className="flex justify-center items-center gap-[40px] text-primary-white">
           <button
             className="p-[15px] rounded-[48px] bg-[#6205E7]"
-            onClick={initWeb5}
+            onClick={() => initWeb5()}
           >
             Connect
           </button>
