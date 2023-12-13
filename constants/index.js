@@ -38,3 +38,22 @@ export const dashboardNav = [
     route: "/",
   },
 ];
+
+export const companies = [
+  {
+    name: "Apple",
+    type: "Stocks",
+    icon: "/assets/apple.png",
+    amount: "+$13,4050",
+    marketValue: "+2.0%",
+    isGaining: true,
+  },
+  {
+    name: "Tesla",
+    type: "Stocks",
+    icon: "/assets/tesla.png",
+    amount: "-$13,4050",
+    marketValue: "-1.9%",
+    isGaining: false,
+  },
+];

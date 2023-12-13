@@ -9,6 +9,7 @@
   --primary-gray: #969696;
   --primary-white: #fff;
   --secondary-white: #e1ded9;
+  --border-color: rgba(98, 5, 231, 0.32);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +22,19 @@
 
 body {
   background: #090a0f;
+}
+
+.onboarding_heading {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.onboarding_input_text {
+  outline: none;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--primary-white);
+  font-size: 12px;
+  padding: 3px 2px;
 }
 
 .lineHeight-sm {

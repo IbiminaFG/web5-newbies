@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+.loader {
+  background-color: rgba(98, 5, 231, 0.49);
+}
+
 .lh {
   line-height: 30px;
 }
@@ -19,6 +23,10 @@
 
 .text_white_100 {
   color: var(--primary-white);
+}
+
+.text_white_200 {
+  color: var(--secondary-white);
 }
 
 .small_text {
