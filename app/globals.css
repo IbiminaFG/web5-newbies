@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary-gray: #969696;
+  --primary-white: #fff;
+  --secondary-white: #e1ded9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,6 +39,8 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .button_style::before {
@@ -48,7 +53,7 @@ body {
 }
 
 .button_style::after {
-  content: "Watch Demo";
+  content: "Join Community";
   position: absolute;
   background-color: #090a0f;
   width: 97%;
@@ -62,6 +67,10 @@ body {
 
 .button_style:hover::before {
   animation: spin 1.5s infinite linear;
+}
+
+.button_style:hover::after {
+  content: "Connect";
 }
 
 @keyframes spin {
@@ -103,9 +112,9 @@ input::placeholder {
   text-transform: capitalize;
 }
 
-main {
+/* main {
   overflow: hidden;
-}
+} */
 
 .heading_text {
   color: #fcf7ff;
@@ -238,6 +247,38 @@ main {
   );
   filter: blur(2px);
   top: -1000;
+  z-index: -1;
+}
+
+.left_radial_ball {
+  position: absolute;
+  width: 1036px;
+  height: 1036px;
+  border-radius: 50%;
+  background: radial-gradient(
+    41.75% 41.75% at 53.12% 41.91%,
+    rgba(19, 22, 77, 0.52) 0%,
+    rgba(9, 10, 15, 0.47) 100%
+  );
+  filter: blur(2px);
+  top: -400px;
+  left: -500px;
+  z-index: -1;
+}
+
+.right_radial_ball {
+  position: absolute;
+  width: 1036px;
+  height: 1036px;
+  border-radius: 50%;
+  background: radial-gradient(
+    41.75% 41.75% at 53.12% 41.91%,
+    rgba(19, 22, 77, 0.52) 0%,
+    rgba(9, 10, 15, 0.47) 100%
+  );
+  filter: blur(2px);
+  top: 0;
+  right: -100px;
   z-index: -1;
 }
 

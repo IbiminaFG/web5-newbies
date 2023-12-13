@@ -118,7 +118,7 @@ export default function Home() {
   return (
     <>
       <Header isConnected={isConnected} collapseDid={collapseDid} />
-      <main className="sm:py-24 pb-40 relative">
+      <main className="sm:py-24 pb-40 relative overflow-hidden">
         <TopRadialBall />
         <SearchBar />
         <h1 className="heading_text">Decentralized Financial </h1>
@@ -130,21 +130,9 @@ export default function Home() {
           sector.
         </p>
         <div className="flex justify-center items-center gap-[40px] text-primary-white">
-          <button
-            className="p-[15px] rounded-[48px] bg-[#6205E7]"
-            onClick={() => initWeb5()}
-          >
-            Connect
-          </button>
-          <button className="button_style">
+          <Link href="/dashboard" className="button_style">
             <span>Watch Demo</span>{" "}
-            <Image
-              src="/assets/play-circle.svg"
-              width={20}
-              height={20}
-              alt="play icon"
-            />
-          </button>
+          </Link>
         </div>
         <div className="flex justify-center items-center mt-6 text-sm sm:text-2xl font-bold text-primary-white gap-1">
           <span className="capitalize">learn about our launch date</span>
@@ -190,7 +178,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="flex flex-col items-center px-3 sm:px-[100px] relative">
+        <section className="flex flex-col items-center px-3 sm:px-[100px] relative overflow-x-hidden">
           <TopRadialBall />
           <h1 className="btn text-primary-white mt-[132px]">Core Features</h1>
           <h2 className="heading_text">building amazing services</h2>
